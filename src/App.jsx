@@ -14,8 +14,8 @@ function App() {
   return (
     <div className="container">
       <h1 className="my-5">Aggiungi un articolo</h1>
-      <form action="#">
-        <input type="text" placeholder="Scrivi il titolo dell'articolo" />
+      <form action="#" className="d-flex">
+        <input type="text" className="form-control" placeholder="Scrivi il titolo dell'articolo" />
         <button type="submit" className="btn btn-success mx-2">Aggiungi</button>
       </form>
 
