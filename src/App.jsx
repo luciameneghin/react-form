@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 const articles = [
@@ -10,17 +9,39 @@ const articles = [
 ];
 
 function App() {
+  const [articlesList, setArticlesList] = useState(articles)
+  const [newArticle, setNewArticle] = useState({ title: '' })
 
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    setArticlesList([...articlesList, newArticle]);
+    setNewArticle({ title: '' });
+  }
+
+  const handlerNewTask = (e) => {
+    const updatedArticle = {
+      id: Date.now(),
+      title: e.target.value
+    }
+    setNewArticle(updatedArticle);
+  }
   return (
     <div className="container">
       <h1 className="my-5">Aggiungi un articolo</h1>
-      <form action="#" className="d-flex">
-        <input type="text" className="form-control" placeholder="Scrivi il titolo dell'articolo" />
+
+      <form action="#" className="d-flex" onSubmit={handlerSubmit}>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Scrivi il titolo dell'articolo"
+          value={newArticle.title}
+          onChange={handlerNewTask}
+        />
         <button type="submit" className="btn btn-success mx-2">Aggiungi</button>
       </form>
 
       <ul className="list-group my-3">
-        {articles.map(art => (
+        {articlesList.map(art => (
           <li
             key={art.id}
             className="list-group-item d-flex justify-content-between">
